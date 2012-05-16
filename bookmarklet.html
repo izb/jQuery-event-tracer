@@ -1,16 +1,25 @@
 <!doctype html>
 <p>
-Just drag the links you want onto your bookmarks bar.
+Just drag the link onto your bookmarks bar.
+
+<p>
 Click it on any page to see a trace of jQuery events in the console.
+
+<p>
 Remember that jQuery must be loaded onto the page you are viewing,
 or it won't work.
 
 <p>
 Trace all jQuery events with this bookmarklet
 <br />
-<a href="javascript:(function(){jQuery('*').each(function(ei,ae){if(jQuery(ae).data('events')!==undefined){var $ae=jQuery(ae);jQuery.each($ae.data('events'),function(i,e){jQuery.each(e,function(j,h){var k=h.handler;h.handler=function(v){console.log('[jQE]',i,ae);return k(e);}});});}});})();">jQuery trace</a> &lt;- Drag this to your bookmarks bar
+<a href="javascript:(function(){jQuery('*').each(function(ei,ae){if(jQuery(ae).data('events')!==undefined){var $ae=jQuery(ae);jQuery.each($ae.data('events'),function(i,e){jQuery.each(e,function(j,h){var k=h.handler;h.handler=function(v){console.log('[jQE]',i,ae,{handler:k});return k(e);}});});}});})();">jQuery trace</a> &lt;- Drag this to your bookmarks bar
 
+<!--
 <p><button id="test">Test</button>
+-->
+
+<p>
+<a href="http://github.com/izb/jQuery-event-tracer">See the code on github.com</a>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -26,7 +35,7 @@ $(function() {
         jQuery.each($ae.data('events'),function(i,e){
             jQuery.each(e,function(j,h){
                 var k=h.handler;
-                h.handler=function(v){console.log('[jQE]',i,ae);return k(e);}
+                h.handler=function(v){console.log('[jQE]',i,ae,{handler:k});return k(e);}
             });
         });
     }});
@@ -36,5 +45,5 @@ $(function() {
 
 </script>
 <!--
-    jQuery('*').each(function(ei,ae){if(jQuery(ae).data('events')!==undefined){var $ae=jQuery(ae);jQuery.each($ae.data('events'),function(i,e){jQuery.each(e,function(j,h){var k=h.handler;h.handler=function(v){console.log('[jQE]',i,$ae.attr('id')===undefined?ae:'#'+$ae.attr('id'));return k(e);}});});}});
+    jQuery('*').each(function(ei,ae){if(jQuery(ae).data('events')!==undefined){var $ae=jQuery(ae);jQuery.each($ae.data('events'),function(i,e){jQuery.each(e,function(j,h){var k=h.handler;h.handler=function(v){console.log('[jQE]',i,ae,{handler:k});return k(e);}});});}});
 -->
