@@ -8,4 +8,33 @@ or it won't work.
 <p>
 Trace all jQuery events with this bookmarklet
 <br />
-<a href="javascript:(function(){ window.alert('test'); })();">jQuery trace</a>
+<a href="javascript:(function(){jQuery('*').each(function(ei,ae){if(jQuery(ae).data('events')!==undefined){var $ae=jQuery(ae);jQuery.each($ae.data('events'),function(i,e){jQuery.each(e,function(j,h){var k=h.handler;h.handler=function(v){console.log('[jQE]',i,ae);return k(e);}});});}});})();">jQuery trace</a> &lt;- Drag this to your bookmarks bar
+
+<p><button id="test">Test</button>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+
+    $('#test').click(function() {
+        window.alert("This button serves as a simple test for the code on this page.");
+    });
+
+
+    jQuery('*').each(function(ei,ae){if(jQuery(ae).data('events')!==undefined){
+        var $ae=jQuery(ae);
+        jQuery.each($ae.data('events'),function(i,e){
+            jQuery.each(e,function(j,h){
+                var k=h.handler;
+                h.handler=function(v){console.log('[jQE]',i,ae);return k(e);}
+            });
+        });
+    }});
+
+
+});
+
+</script>
+<!--
+    jQuery('*').each(function(ei,ae){if(jQuery(ae).data('events')!==undefined){var $ae=jQuery(ae);jQuery.each($ae.data('events'),function(i,e){jQuery.each(e,function(j,h){var k=h.handler;h.handler=function(v){console.log('[jQE]',i,$ae.attr('id')===undefined?ae:'#'+$ae.attr('id'));return k(e);}});});}});
+-->
